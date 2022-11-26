@@ -1,3 +1,5 @@
+// This module generates common links used for scam popup sites
+
 const BASE_WEBSITES = [
   'youtube',
   'facebook',
