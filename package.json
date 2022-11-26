@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node ."
+    "start": "npx tsc && node ./dist/"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "prettier": "2.8.0"
+    "prettier": "2.8.0",
+    "typescript": "^4.9.3"
   }
 }
