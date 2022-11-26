@@ -1,5 +1,4 @@
 import { generateLinks } from './modules/generateLinks';
-import puppeteer from 'puppeteer';
 const path = require('path');
 
 const BASE_WEBSITES = [
@@ -10,3 +9,5 @@ const BASE_WEBSITES = [
   'reddit',
   'instagram',
 ];
+
+console.log(generateLinks(BASE_WEBSITES));
