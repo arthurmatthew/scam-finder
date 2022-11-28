@@ -6,6 +6,11 @@ interface Settings {
 interface Modifiers {
   missingLetters: Boolean;
   extraLetters: Boolean;
+  commonScamLinks: CommonScamLinks;
+}
+
+interface CommonScamLinks {
+  maximum: number;
 }
 
 export const generate = (base: Array<String>, settings: Settings) => {
@@ -17,7 +22,7 @@ export const generate = (base: Array<String>, settings: Settings) => {
       ...output,
       ...(mods.missingLetters ? missingLetters(link) : []),
       ...(mods.extraLetters ? extraLetters(link) : []),
-      ...commonScamLinks(), // Common Scam Links is always enabled.
+      ...commonScamLinks(mods.commonScamLinks.maximum), // Common Scam Links is always enabled.
     ];
   }
   return [...new Set(output)];

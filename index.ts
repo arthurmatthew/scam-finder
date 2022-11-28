@@ -15,6 +15,9 @@ const CONFIG = {
     MODIFIERS: {
       missingLetters: true,
       extraLetters: true,
+      commonScamLinks: {
+        maximum: 100,
+      },
     },
   },
   BROWSER: {
