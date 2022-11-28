@@ -76,6 +76,12 @@ const averageArray = (history: Array<number>) => {
   return timeLeft / history.length;
 };
 
+const msToMinutesAndSeconds = (ms: number) => {
+  let mins = Math.floor(ms / 60000);
+  let seconds = ((ms % 60000) / 1000).toFixed(0);
+  return [mins, seconds];
+};
+
 (async () => {
   const browser = await puppeteer.launch({
     headless: CONFIG.BROWSER.headless,
@@ -116,7 +122,15 @@ const averageArray = (history: Array<number>) => {
     alert(
       `${scamWebsites.length - i} more websites - estimated ${
         CONFIG.coloredConsoleLogs ? '\x1b[30;47;1;3m' : '\x1b[0m'
-      }${averageArray(timeHistory) * scamWebsites.length} ms\x1b[0m left`
+      }${
+        msToMinutesAndSeconds(
+          averageArray(timeHistory) * scamWebsites.length
+        )[0]
+      } mins ${
+        msToMinutesAndSeconds(
+          averageArray(timeHistory) * scamWebsites.length
+        )[1]
+      } seconds\x1b[0m left`
     );
   }
   await browser.close();
