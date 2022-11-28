@@ -1,43 +1,49 @@
 // This module generates common links used for scam popup sites
 
-const BASE_WEBSITES = [
-  'youtube',
-  'facebook',
-  'gmail',
-  'twitter',
-  'reddit',
-  'instagram',
-  'outlook',
-  'teamviewer',
-];
+interface Settings {
+  MODIFIERS: Modifiers;
+}
+interface Modifiers {
+  missingLetters: Boolean;
+  extraLetters: Boolean;
+}
 
-export const generateLinks = (base: Array<String>, settings?: Object) => {
+export const generate = (base: Array<String>, settings: Settings) => {
   let output = new Array<String>();
+  let mods = settings.MODIFIERS;
   for (let i = 0; i < base.length; i++) {
     let link = base[i];
     output = [
       ...output,
-      ...missingLetters(link),
-      ...extraLetters(link),
-      ...commonScamLinks(),
+      ...(mods.missingLetters ? missingLetters(link) : []),
+      ...(mods.extraLetters ? extraLetters(link) : []),
+      ...commonScamLinks(), // Common Scam Links is always enabled.
     ];
   }
   return [...new Set(output)];
 };
 
+/* 
+Below are modifier functions.
+They should handle removing + readding the TLD
+They should also handle enabled/disabled
+*/
+
 const missingLetters = (base: String) => {
   let links: Array<String> = [];
-  let link = base;
+  let link = base.split('.')[0];
+  let suffix = base.split('.')[1];
   for (let i = 0; i < link.length; i++) {
-    links.push(link.slice(0, i) + link.slice(i + 1));
+    links.push(`${link.slice(0, i)}${link.slice(i + 1)}.${suffix}`);
   }
   return links;
 };
 const extraLetters = (base: String) => {
   let links: Array<String> = [];
-  let link = base;
+  let link = base.split('.')[0];
+  let suffix = base.split('.')[1];
   for (let i = 0; i < link.length; i++) {
-    links.push(link.slice(0, i) + link[i] + link.slice(i));
+    links.push(`${link.slice(0, i)}${link[i]}${link.slice(i)}.${suffix}`);
   }
   return links;
 };
