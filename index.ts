@@ -65,6 +65,7 @@ const findElapsed = (start: number, end: number) => {
     width: CONFIG.BROWSER.viewport.width,
     height: CONFIG.BROWSER.viewport.height,
   });
+  let totalStart = performance.now();
   for (let i = 0; i < scamWebsites.length; i++) {
     let start = performance.now();
     let end = 0;
@@ -84,4 +85,6 @@ const findElapsed = (start: number, end: number) => {
     alert(`${scamWebsites[i]} done in ${findElapsed(start, end)}`, 0);
   }
   await browser.close();
+  let totalEnd = performance.now();
+  alert(`Done in ${findElapsed(totalStart, totalEnd)}`);
 })();
