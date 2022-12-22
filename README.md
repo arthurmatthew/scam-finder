@@ -4,6 +4,8 @@
     <img src="https://img.shields.io/github/watchers/arthurmatthew/scam-finder?color=violet" alt="Stars">
 </p>
 
+⚠ This is an incomplete project.
+
 **Scam Finder** is an open source tool which helps find **scam popup** websites. It loads through domains known for hosting malicious websites. The project is written in TypeScript using Puppeteer.
 
 <ul style="text-align: center;">
